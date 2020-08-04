@@ -1,0 +1,9 @@
+body{
+    background-color: #F2F0FC;
+    font-family: "open sans";
+    color: #002C37;
+}
+img {
+    max-width: 100%;
+    max-height: 100%;
+}

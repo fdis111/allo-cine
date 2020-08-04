@@ -1,10 +1,18 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Films from "./pages/Films";
+import FilmDetails from "./pages/FilmDetails";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css"
 
 function App() {
   return (
-    <div >
-      app
-    </div>
+    <Router>
+        <Switch>
+          <Route path="/filmDetails" component={FilmDetails}/>
+          <Route exact path="/" component={Films} />
+        </Switch>
+    </Router>
   );
 }
 
