@@ -2,7 +2,8 @@ import React from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle }  from "reactstrap";
 import { getImageFromApi } from "../api/movies";
 import styled from "styled-components";
-import theme from "../theme"
+import theme from "../theme";
+// import { Link } from "react-router-dom"; 
 // import { Link } from "react-router-dom"
 
 
@@ -16,7 +17,6 @@ export default function CardCustom (props) {
     const overviewWordsArrayCuted = overviewWordsArray.filter((word, index) => index < 40 );
     const overview =  overviewWordsArrayCuted.join(" ");
 
-    // console.log(b);
 
     return(
         <CardCustomContainer className="container">
@@ -26,10 +26,10 @@ export default function CardCustom (props) {
                         <img top width="100%" src={image} alt={ props.movie.original_title} />   
                     </div>
                     
-                    <CardBody className="col-12 col-md-7 pt-0">
-                            <CardTitle style={{fontWeight: "bold", fontFamily: "Montserrat"}}>{props.movie.title}</CardTitle>
-                            <CardSubtitle style={{color: theme.colors.red, fontFamily: "open sans"}}>Sortie: {props.movie.release_date}</CardSubtitle>
-                            <CardText style={{fontFamily: "open sans"}}>{overview}...</CardText>
+                    <CardBody className=" col-md-9 pt-0">
+                            <CardTitle style={{fontWeight: "bold", fontFamily: "Montserrat", marginLeft: 10, marginRight: 10}}>{props.movie.title}</CardTitle>
+                            <CardSubtitle style={{color: theme.colors.red, fontFamily: "open sans", marginLeft: 10, marginRight: 10}}>Sortie: {props.movie.release_date}</CardSubtitle>
+                            <CardText style={{fontFamily: "open sans", marginLeft: 10, marginRight: 10}}>{overview}...</CardText>
                     </CardBody>
                 </div>
             </Card>

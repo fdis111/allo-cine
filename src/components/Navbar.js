@@ -24,7 +24,10 @@ const NavbarContainer = styled.div`
     background-color: ${theme.colors.blue};
 `;
 
-export default function Navigation () {
+export default function Navigation ( props ) {
+
+
+    const { value, onChange, onKeyDown } = props;
 
     const [inputSearchDisplay, setInputSearchDisplay] = useState("none");
 
@@ -44,7 +47,12 @@ export default function Navigation () {
                    <SearchButton onClick={toggle} /> 
                 </Navbar>
             </NavbarContainer>
-            <CustomInput display={inputSearchDisplay} />
+
+            <CustomInput display={inputSearchDisplay}
+                value={ value }
+                onChange={ onChange }
+                onKeyDown={onKeyDown}
+            />
         </>
     )
 }

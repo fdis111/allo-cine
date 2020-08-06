@@ -1,3 +1,4 @@
+import Error from "../components/Errors"
 const API_TOKEN = "c4869b7c782298e267a863ca95b90e3b";
 
 
@@ -8,7 +9,7 @@ export const getFilmsFromApiWithSearchedText = async (text, page) => {
         const response = await fetch(url);
         return  await response.json()
     } catch (error) {
-        console.log(error);
+        console.log(error) 
         
     }
 }
