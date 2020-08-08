@@ -1,7 +1,6 @@
 import React from 'react';
 import { Spinner } from 'reactstrap';
 import styled from "styled-components";
-import theme from "../theme";
 
 const LoaderContainer = styled.div`
     display: flex;

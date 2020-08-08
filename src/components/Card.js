@@ -1,14 +1,15 @@
 import React from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle }  from "reactstrap";
+import { Card, CardText, CardBody, CardTitle, CardSubtitle }  from "reactstrap";
+import { Link } from "react-router-dom";
 import { getImageFromApi } from "../api/movies";
 import styled from "styled-components";
 import theme from "../theme";
-// import { Link } from "react-router-dom"; 
-// import { Link } from "react-router-dom"
-
+import moment from 'moment';
 
 const CardCustomContainer = styled.div`
-    margin-top: 16px;
+    /* :hover{
+        box-shadow: 2px 4px silver;
+    } */
 `
 
 export default function CardCustom (props) {
@@ -19,20 +20,22 @@ export default function CardCustom (props) {
 
 
     return(
-        <CardCustomContainer className="container">
-            <Card>
-                <div className="row">
-                    <div className="col-12 col-md-3 mt-1 mb-1">
-                        <img top width="100%" src={image} alt={ props.movie.original_title} />   
+        <CardCustomContainer className="container mt-3 ">
+            <Link to={{pathname:`/filmdetails/${props.movie.title}`, state: {FilmID: props.movie.id}}} >
+                <Card>
+                    <div className="row">
+                        <div className="col-12 col-md-3 mt-1 mb-1">
+                            <img top width="100%" src={image} alt={ props.movie.original_title} />   
+                        </div>
+                        
+                        <CardBody className=" col-md-9 pt-0">
+                                <CardTitle tag="h1"  style={{ fontWeight: 600, fontSize: 24 , marginLeft: 10, marginRight: 10}}>{props.movie.title}</CardTitle>
+                                <CardSubtitle style={{color: theme.colors.red, fontFamily: "open sans", marginLeft: 10, marginRight: 10}}>Sortie: {moment(props.movie.release_date, "YYYYMMDD").format("DD/MM/YYYY")}</CardSubtitle>
+                                <CardText style={{fontFamily: "open sans", marginLeft: 10, marginRight: 10}}>{overview}...</CardText>
+                        </CardBody>
                     </div>
-                    
-                    <CardBody className=" col-md-9 pt-0">
-                            <CardTitle style={{fontWeight: "bold", fontFamily: "Montserrat", marginLeft: 10, marginRight: 10}}>{props.movie.title}</CardTitle>
-                            <CardSubtitle style={{color: theme.colors.red, fontFamily: "open sans", marginLeft: 10, marginRight: 10}}>Sortie: {props.movie.release_date}</CardSubtitle>
-                            <CardText style={{fontFamily: "open sans", marginLeft: 10, marginRight: 10}}>{overview}...</CardText>
-                    </CardBody>
-                </div>
-            </Card>
+                </Card>
+            </Link>
         </CardCustomContainer>
     )
 }

@@ -1,4 +1,3 @@
-import Error from "../components/Errors"
 const API_TOKEN = "c4869b7c782298e267a863ca95b90e3b";
 
 
@@ -15,7 +14,7 @@ export const getFilmsFromApiWithSearchedText = async (text, page) => {
 }
 
 export const getImageFromApi = (name) => {
-    return `https://image.tmdb.org/t/p/w300${name}`;
+    return `https://image.tmdb.org/t/p/w500${name}`;
 }
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect  }  from "react";
+import React, { useState }  from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
@@ -13,7 +13,7 @@ export default function Films () {
 
     const [ films, setFilms ] = useState(null);
     const [ textSeach, setTextSearch ] =  useState("");
-    const [ page, setPage ] = useState(1);
+    // const [ page, setPage ] = useState(1);
     const [ loading, setLoading ] = useState(false);
     // const [ error, setError ] = useState(false);
 
@@ -22,7 +22,7 @@ export default function Films () {
             if (e.key === "Enter") {
                 if (textSeach.length >= 2) {
                     setLoading(true);
-                    const results = await getFilmsFromApiWithSearchedText(textSeach, page);
+                    const results = await getFilmsFromApiWithSearchedText(textSeach, 1);
                     setFilms(results)
                     setLoading(false);
                 }
