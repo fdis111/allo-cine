@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
         <Switch>
-          <Route path="/filmdetails/:film" component={FilmDetails}/>
+          <Route path="/filmdetails/:id" component={FilmDetails}/>
           <Route exact path="/" component={Films} />
         </Switch>
     </Router>

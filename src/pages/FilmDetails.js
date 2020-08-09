@@ -28,7 +28,7 @@ export default function FilmDetails (props) {
 
 
 
-    const FilmId = props.location.state.FilmID
+    const FilmId = props.match.params.id;
 
     useEffect( () => {
         getFilmDetailsFromApi(FilmId).then(data => {

@@ -21,7 +21,7 @@ export default function CardCustom (props) {
 
     return(
         <CardCustomContainer className="container mt-3 ">
-            <Link to={{pathname:`/filmdetails/${props.movie.title}`, state: {FilmID: props.movie.id}}} >
+            <Link to={`/filmdetails/${props.movie.id}`} >
                 <Card>
                     <div className="row">
                         <div className="col-12 col-md-3 mt-1 mb-1">
