@@ -6,6 +6,7 @@ import moment from 'moment';
 import numeral from "numeral";
 import Loader from "../components/Loader";
 import { getFilmDetailsFromApi } from "../api/movies";
+import defaultImage from "../defaultImage.png";
 
 
 const CustomLabel = styled.span`
@@ -51,7 +52,7 @@ export default function FilmDetails (props) {
             return(
                 <div className="row mt-3">
                     <div className="col-md-6">
-                        <img src={  getImageFromApi(film.backdrop_path) } alt={film.title} />
+                        <img src={ film.backdrop_path ? getImageFromApi(film.backdrop_path) : defaultImage } alt={film.title} />
                     </div>
                     <div className="col-md-6">
                         <FilmTiTle>{film.title}</FilmTiTle>

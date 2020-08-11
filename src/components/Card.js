@@ -5,6 +5,7 @@ import { getImageFromApi } from "../api/movies";
 import styled from "styled-components";
 import theme from "../theme";
 import moment from 'moment';
+import defaultImage from "../defaultImage.png";
 
 const CardCustomContainer = styled.div`
     /* :hover{
@@ -13,7 +14,7 @@ const CardCustomContainer = styled.div`
 `
 
 export default function CardCustom (props) {
-    const image = getImageFromApi(props.movie.backdrop_path);
+    const image = props.movie.backdrop_path ? getImageFromApi(props.movie.backdrop_path) : defaultImage;
     const overviewWordsArray = props.movie.overview.split(" ");
     const overviewWordsArrayCuted = overviewWordsArray.filter((word, index) => index < 40 );
     const overview =  overviewWordsArrayCuted.join(" ");
