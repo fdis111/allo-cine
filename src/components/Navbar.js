@@ -5,8 +5,8 @@ import theme from "../theme";
 import SearchButton from "./SearchButton"
 import Logo from "./Logo";
 // import { Fade } from "reactstrap";
-import CustomInput from "./Input";
-
+// import CustomInput from "./Input";
+import Searchbar from "./Searchbar";
 
 
 const Navbar = styled.div`
@@ -27,7 +27,7 @@ const NavbarContainer = styled.div`
 export default function Navigation ( props ) {
 
 
-    const { value, onChange, onKeyDown } = props;
+    const { value, onChange, onSubmit } = props;
 
     const [inputSearchDisplay, setInputSearchDisplay] = useState("none");
 
@@ -47,11 +47,11 @@ export default function Navigation ( props ) {
                    <SearchButton onClick={toggle} /> 
                 </Navbar>
             </NavbarContainer>
-
-            <CustomInput display={inputSearchDisplay}
+            <Searchbar
+                display={inputSearchDisplay}
                 value={ value }
                 onChange={ onChange }
-                onKeyDown={onKeyDown}
+                onSubmit={onSubmit}
             />
         </>
     )

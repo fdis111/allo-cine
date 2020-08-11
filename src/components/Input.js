@@ -18,13 +18,12 @@ const Input = styled.input`
 `
 
 export default function CustomInput( props ){
-    const { value, onChange, onKeyDown } = props
+    const { value, onChange } = props
 
     return(
-        <CustomInputContainer className="container mt-2" display={props.display}>
+        <CustomInputContainer className="container mt-2">
             <Input
                 type="Search"
-                onKeyDown={ onKeyDown }
                 value={ value }
                 onChange={ onChange }
                 placeholder= {"Rechercher un film"} 

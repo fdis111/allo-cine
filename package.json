@@ -17,6 +17,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-infinite-scroll-component": "^5.0.5",
+    "react-infinite-scroll-hook": "^3.0.0",
+    "react-reactstrap-pagination": "^2.0.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "reactstrap": "^8.5.1",

@@ -1,41 +1,34 @@
-import React, { useState }  from "react";
+import React, { useState, useEffect }  from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 // import Error from "../components/Errors";
 // import Data from "../shared/moviesData";
 import { getFilmsFromApiWithSearchedText } from "../api/movies"; 
+import PaginationComponent from "react-reactstrap-pagination";
 
 
 
 
 export default function Films () {
 
-    const [ films, setFilms ] = useState(null);
+    const [ films, setFilms ] = useState([]);
     const [ textSeach, setTextSearch ] =  useState("");
-    // const [ page, setPage ] = useState(1);
+    const [ page, setPage ] = useState(0);
     const [ loading, setLoading ] = useState(false);
+    const [ totalResults, setTotalResults ] = useState(0);
+    const [ totalPage , setTotalPage ] = useState(0)
+    // const [ selectedPage, setSelectedPage] = useState(0)
     // const [ error, setError ] = useState(false);
 
-    const hadleTextSeach = async(e) => {
-        try {
-            if (e.key === "Enter") {
-                if (textSeach.length >= 2) {
-                    setLoading(true);
-                    const results = await getFilmsFromApiWithSearchedText(textSeach, 1);
-                    setFilms(results)
-                    setLoading(false);
-                }
-                
-            } else{
-                return setTextSearch(e.target.value);
-            }
-        } catch (error) {
-            console.log(error);
-        //    return setError(true);
-        }
+    const hadleTextSeach = (e) => {
+        return setTextSearch(e.target.value);
     }
 
+    const hadleSubmit = (e) => {
+        e.preventDefault();
+        fetchFilms();
+    }
 
     const renderLoader = (loading) => {
         if(loading === true) {
@@ -45,21 +38,10 @@ export default function Films () {
         }
     } 
 
-    // const renderError = (error) => {
-    //     if(error === true) {
-    //     return (
-    //         <Error error="Probleme de connexion internet" />
-        
-    //     )
-    //     } else {
-    //         return;
-    //     }
-    // }
-
     const renderMovies = () => {
-        if (films != null) {
+        if (films.length > 1) {
             return (
-                films.results.map( film => {
+                films.map( film => {
                    return <Card key={film.id} movie={film} />
                 })
             )
@@ -68,18 +50,83 @@ export default function Films () {
         }
     };
 
+    const fetchFilms = async () => {
+        try {
+            setLoading(true);
+            const results = await getFilmsFromApiWithSearchedText(textSeach, page + 1);
+            setPage(results.page);
+            setTotalResults(results.total_results);
+            setTotalPage(results.total_pages)
+            setFilms(results.results);
+
+            setLoading(false);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
+    
+    useEffect(() => {
+        setPage(0);
+        // setFilms([]);
+        setTotalResults(0);
+    }, [textSeach])
+
+    const renderPagination = () => {
+        if (totalResults > 20) {
+            return(
+                <PaginationComponent
+                    firstPageText="Début"
+                    lastPageText="Fin"
+                    previousPageText="Précedent"
+                    nextPageText="Suivant"
+                    size="md"
+                    totalItems={totalResults}
+                    pageSize={20}
+                    onSelect={handleSelected}
+                    maxPaginationNumbers={0}
+                /> 
+            )
+        }
+    }
+
+    const handleSelected = async(selectedPage) => {
+        try {
+            setLoading(true);
+            const results = await getFilmsFromApiWithSearchedText(textSeach, selectedPage);
+            setPage(results.page);
+            // setTotalPage(results.total_pages);
+            setFilms(results.results);
+
+            setLoading(false);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return(
         <div>
           
             <Navbar 
-                onChange={ hadleTextSeach } 
+                onSubmit = { hadleSubmit }
                 value={ textSeach } 
-                onKeyDown={ hadleTextSeach }
+                onChange={  hadleTextSeach }
             />
-            {/* { renderError(error)} */}
+            <div className="container mt-3">
+                <h4>{totalResults ? `${totalResults} resultats trouvés pour ${textSeach}`: null}</h4>
+                
+                <p>{ page > 0 ? `Page ${page} / ${totalPage}` : null}</p>
+            </div>
+            
             {renderLoader(loading)}
             {renderMovies()}
+            <div className="container mt-3">
+                {renderPagination()} 
+            </div>
             
         </div>
     )

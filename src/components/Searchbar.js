@@ -1,10 +1,24 @@
 import React from "react";
+import { Form } from "reactstrap";
+import CustomInput from "./Input";
 
 
-export default function Searchbar () {
+
+export default function Searchbar (props) {
+
+    const { value, onChange, onSubmit, display } = props
+
+
     return(
-        <div>
-            <p>Searchbar  component</p>
+        <div style={{display: display}}>
+            <Form onSubmit={ onSubmit }>
+                <CustomInput
+                     value={ value }
+                     onChange={ onChange }
+                     
+                />
+            </Form>
+            
         </div>
     )
 }
