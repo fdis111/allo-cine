@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import Loader from "../components/Loader";
 // import Error from "../components/Errors";
 // import Data from "../shared/moviesData";
-import { getFilmsFromApiWithSearchedText } from "../api/movies"; 
+import { getFilmsFromApiWithSearchedText, getUpComingFilmsFromApi } from "../api/movies"; 
 import PaginationComponent from "react-reactstrap-pagination";
 
 
@@ -107,6 +107,30 @@ export default function Films () {
             console.log(error);
         }
     }
+
+    useEffect( () => {
+        fetchUpcommingFilms();
+    },[])
+
+    const fetchUpcommingFilms = async() => {
+        try {
+            setLoading(true);
+            const results = await getUpComingFilmsFromApi(page + 1);
+            console.log(results);
+            setFilms(results.results);
+            setLoading(false);
+        } catch (error) {
+            console.log(error) 
+            
+        }
+    }
+        
+
+    // async function fetchData() {
+    //     // You can await here
+    //     const response = await fetch(url);
+    //     const results = await response.json();
+    //   }
 
     return(
         <div>
