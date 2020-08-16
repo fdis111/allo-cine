@@ -19,8 +19,7 @@ export const getImageFromApi = (name) => {
 
 
 export const getUpComingFilmsFromApi = async(page) => {
-    const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=c4869b7c782298e267a863ca95b90e3b&language=fr&page=${page}`;
-    try {
+    const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_TOKEN}&language=fr&page=${page}`;
         try {
             const response = await fetch(url);
             return  await response.json()
@@ -28,10 +27,18 @@ export const getUpComingFilmsFromApi = async(page) => {
             console.log(error) 
             
         }
+} 
+
+export const getPopularFilmsFromApi = async(page) => {
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_TOKEN}&language=en-US&page=${page}`;
+    try {
+        const response = await fetch(url);
+        return  await response.json()
     } catch (error) {
+        console.log(error) 
         
     }
-} 
+}
 
 export const getFilmDetailsFromApi =  (id) => {
     const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_TOKEN}&language=fr`;

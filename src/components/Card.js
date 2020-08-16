@@ -8,34 +8,33 @@ import moment from 'moment';
 import defaultImage from "../defaultImage.png";
 
 const CardCustomContainer = styled.div`
-    /* :hover{
-        box-shadow: 2px 4px silver;
-    } */
+   margin-bottom: 20px;
+   background: none;
+`
+const CardBodyCustom = styled.div`
+    padding-left: 0;
+    padding-right: 0;
 `
 
 export default function CardCustom (props) {
-    const image = props.movie.backdrop_path ? getImageFromApi(props.movie.backdrop_path) : defaultImage;
+    const image = props.movie.poster_path ? getImageFromApi(props.movie.poster_path) : defaultImage;
     const overviewWordsArray = props.movie.overview.split(" ");
     const overviewWordsArrayCuted = overviewWordsArray.filter((word, index) => index < 40 );
     const overview =  overviewWordsArrayCuted.join(" ");
 
 
     return(
-        <CardCustomContainer className="container mt-3 ">
-            <Link to={`/filmdetails/${props.movie.id}`} >
-                <Card>
-                    <div className="row">
-                        <div className="col-12 col-md-3 mt-1 mb-1">
-                            <img top width="100%" src={image} alt={ props.movie.original_title} />   
-                        </div>
-                        
-                        <CardBody className=" col-md-9 pt-0">
-                                <CardTitle tag="h1"  style={{ fontWeight: 600, fontSize: 24 , marginLeft: 10, marginRight: 10}}>{props.movie.title}</CardTitle>
-                                <CardSubtitle style={{color: theme.colors.red, fontFamily: "open sans", marginLeft: 10, marginRight: 10}}>Sortie: {moment(props.movie.release_date, "YYYYMMDD").format("DD/MM/YYYY")}</CardSubtitle>
-                                <CardText style={{fontFamily: "open sans", marginLeft: 10, marginRight: 10}}>{overview}...</CardText>
-                        </CardBody>
+        <CardCustomContainer className="col-md-3">
+            <Link to={`/filmdetails/${props.movie.id}`}>
+            <div className="card" >
+                    <div classNane="card-image">
+                        <img src={ image } className="card-img-top" alt="..."/>
                     </div>
-                </Card>
+                                
+                    <CardBodyCustom className="card-body">
+                        <h2 className="card-title">{props.movie.title}</h2>
+                    </CardBodyCustom>
+                </div>
             </Link>
         </CardCustomContainer>
     )

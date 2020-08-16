@@ -1,8 +1,14 @@
 import React from "react";
-
+import {Link} from "react-router-dom";
 
 export default function Logo () {
     return(
-        <div>Allô ciné</div>
+        <div className="logo">
+            
+        <Link to="/">
+            My movies    
+        </Link>   
+            
+        </div>
     )
 }

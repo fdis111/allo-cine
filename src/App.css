@@ -11,10 +11,42 @@ a{
     text-decoration: none !important;
     color: #002C37;
 }
+.logo a {
+    color: #F2F0FC;
+}
+
+.logo a:hover {
+    color: #F2F0FC;
+}
+
+.navbar-dark {
+    background-color: #1181C8;
+}
+.navbar-toggler-icon {
+    /* background-image:url(./defaultImage.png) !important; */
+    border: none;
+}
 
 
+.navbar-dark .navbar-toggler {
+    border: none;
+    outline: 0;
+}
 a:hover{
     text-decoration: none !important;
     color: #002C37;
     
+}
+.card{
+    background: none;
+    border: none;
+}
+
+.card-body{
+    padding-left: 0;
+    padding-right: 0;
+}
+.card-body h2{
+    font-size: 16px;
+    font-weight: 600;
 }

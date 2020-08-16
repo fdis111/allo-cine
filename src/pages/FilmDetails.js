@@ -23,6 +23,10 @@ const SynopsisTitle = styled.h2`
     margin-top: 20px;
 `
 
+const FilmDetailContainer =  styled.div`
+    /* margin-top: 70px; */
+`
+
 export default function FilmDetails (props) {
     const [ loading, setLoading ] = useState(true); 
     const [ film, setFilm ] = useState(undefined);
@@ -50,9 +54,10 @@ export default function FilmDetails (props) {
     const renderFilm = () => {
         if (film) {
             return(
-                <div className="row mt-3">
+                <FilmDetailContainer>
+                    <div className="row mt-3">
                     <div className="col-md-6">
-                        <img src={ film.backdrop_path ? getImageFromApi(film.backdrop_path) : defaultImage } alt={film.title} />
+                        <img src={ film.poster_path ? getImageFromApi(film.poster_path) : defaultImage } alt={film.title} />
                     </div>
                     <div className="col-md-6">
                         <FilmTiTle>{film.title}</FilmTiTle>
@@ -72,12 +77,14 @@ export default function FilmDetails (props) {
                             <CustomLabel>Budget </CustomLabel> 
                             {numeral(film.budget).format('0,0')} $
                         </div>
-                    </div>
-                    <div className="col-12">
-                        <SynopsisTitle>Synopsis</SynopsisTitle>
+                        <div>
+                            <SynopsisTitle>Synopsis</SynopsisTitle>
                         <p>{film.overview}</p> 
                     </div>
-                </div>
+                    </div>
+                    
+                    </div>
+                </FilmDetailContainer>
             )
         }
     }

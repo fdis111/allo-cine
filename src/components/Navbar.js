@@ -18,10 +18,18 @@ const Navbar = styled.div`
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: 24px;
+    
 `
 const NavbarContainer = styled.div`
     
     background-color: ${theme.colors.blue};
+    /* box-shadow: 3px 4px 7px #B1B1B1; */
+    /* position: fixed;
+    width: 100%;
+    z-index:100;
+    top: 0;
+    left: 0;
+     */
 `;
 
 export default function Navigation ( props ) {

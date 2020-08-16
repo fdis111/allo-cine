@@ -2,13 +2,16 @@ import React, { useState, useEffect }  from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
+import styled from "styled-components";
 // import Error from "../components/Errors";
 // import Data from "../shared/moviesData";
-import { getFilmsFromApiWithSearchedText, getUpComingFilmsFromApi } from "../api/movies"; 
+import { getFilmsFromApiWithSearchedText, getPopularFilmsFromApi } from "../api/movies"; 
 import PaginationComponent from "react-reactstrap-pagination";
 
 
-
+const FilmContainer = styled.div`
+    /* margin-top: 75px; */
+` 
 
 export default function Films () {
 
@@ -17,7 +20,9 @@ export default function Films () {
     const [ page, setPage ] = useState(0);
     const [ loading, setLoading ] = useState(false);
     const [ totalResults, setTotalResults ] = useState(0);
-    const [ totalPage , setTotalPage ] = useState(0)
+    const [ totalPage , setTotalPage ] = useState(0);
+    const [title, setTitle] = useState("");
+    const [ressource, setRessource] = useState("");
     // const [ selectedPage, setSelectedPage] = useState(0)
     // const [ error, setError ] = useState(false);
 
@@ -56,7 +61,9 @@ export default function Films () {
             const results = await getFilmsFromApiWithSearchedText(textSeach, page + 1);
             setPage(results.page);
             setTotalResults(results.total_results);
-            setTotalPage(results.total_pages)
+            setTotalPage(results.total_pages);
+            setTitle(`Résultats pour "${textSeach}"`)
+            setRessource("search");
             setFilms(results.results);
 
             setLoading(false);
@@ -96,7 +103,9 @@ export default function Films () {
     const handleSelected = async(selectedPage) => {
         try {
             setLoading(true);
-            const results = await getFilmsFromApiWithSearchedText(textSeach, selectedPage);
+                const results = ressource === "search" ? await getFilmsFromApiWithSearchedText(textSeach, selectedPage) : await getPopularFilmsFromApi(page + 1);
+         
+            
             setPage(results.page);
             // setTotalPage(results.total_pages);
             setFilms(results.results);
@@ -109,16 +118,21 @@ export default function Films () {
     }
 
     useEffect( () => {
-        fetchUpcommingFilms();
+        fetcPopularFilms();
     },[])
 
-    const fetchUpcommingFilms = async() => {
+    const fetcPopularFilms = async() => {
         try {
             setLoading(true);
-            const results = await getUpComingFilmsFromApi(page + 1);
+            const results = await getPopularFilmsFromApi(page + 1);
             console.log(results);
+            setTotalResults(results.total_results);
+            setTotalPage(results.total_pages);
             setFilms(results.results);
+            setTitle("Films Populaires");
+            setRessource("popular");
             setLoading(false);
+            
         } catch (error) {
             console.log(error) 
             
@@ -140,18 +154,20 @@ export default function Films () {
                 value={ textSeach } 
                 onChange={  hadleTextSeach }
             />
-            <div className="container mt-3">
-                <h4>{totalResults ? `${totalResults} resultats trouvés pour ${textSeach}`: null}</h4>
-                
-                <p>{ page > 0 ? `Page ${page} / ${totalPage}` : null}</p>
-            </div>
-            
             {renderLoader(loading)}
-            {renderMovies()}
-            <div className="container mt-3">
+            <FilmContainer className="container">
+                <div className="mb-4">
+                    <h1>{title}</h1>
+                    <hr />
+                    <p>{ page > 0 ? `Page ${page} / ${totalPage}` : null}</p>
+                </div>
+                
+                <div className="row">
+                    {renderMovies()}
+                    
+                </div>
                 {renderPagination()} 
-            </div>
-            
+            </FilmContainer>
         </div>
     )
 }
