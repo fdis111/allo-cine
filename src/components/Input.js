@@ -18,11 +18,14 @@ const Input = styled.input`
 `
 
 export default function CustomInput( props ){
-    const { value, onChange } = props
+    const { value, onChange } = props;
+
+   
 
     return(
         <CustomInputContainer className="container mt-2">
             <Input
+                 ref={input => input && input.focus()}
                 type="Search"
                 value={ value }
                 onChange={ onChange }

@@ -1,10 +1,9 @@
 import React from "react";
-import { Card, CardText, CardBody, CardTitle, CardSubtitle }  from "reactstrap";
 import { Link } from "react-router-dom";
 import { getImageFromApi } from "../api/movies";
 import styled from "styled-components";
-import theme from "../theme";
-import moment from 'moment';
+// import theme from "../theme";
+// import moment from 'moment';
 import defaultImage from "../defaultImage.png";
 
 const CardCustomContainer = styled.div`
@@ -18,9 +17,9 @@ const CardBodyCustom = styled.div`
 
 export default function CardCustom (props) {
     const image = props.movie.poster_path ? getImageFromApi(props.movie.poster_path) : defaultImage;
-    const overviewWordsArray = props.movie.overview.split(" ");
-    const overviewWordsArrayCuted = overviewWordsArray.filter((word, index) => index < 40 );
-    const overview =  overviewWordsArrayCuted.join(" ");
+    // const overviewWordsArray = props.movie.overview.split(" ");
+    // const overviewWordsArrayCuted = overviewWordsArray.filter((word, index) => index < 40 );
+    // const overview =  overviewWordsArrayCuted.join(" ");
 
 
     return(
