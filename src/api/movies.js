@@ -13,7 +13,7 @@ export const getFilmsFromApiWithSearchedText = async (text, page) => {
     }
 }
 
-export const getImageFromApi = (name) => {
+export const getImageFromApi = (name, size=500) => {
     return `https://image.tmdb.org/t/p/w500${name}`;
 }
 
@@ -30,7 +30,7 @@ export const getUpComingFilmsFromApi = async(page) => {
 } 
 
 export const getPopularFilmsFromApi = async(page) => {
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_TOKEN}&language=en-US&page=${page}`;
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_TOKEN}&language=fr&page=${page}`;
     try {
         const response = await fetch(url);
         return  await response.json()

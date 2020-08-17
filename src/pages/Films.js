@@ -103,7 +103,7 @@ export default function Films () {
     const handleSelected = async(selectedPage) => {
         try {
             setLoading(true);
-                const results = ressource === "search" ? await getFilmsFromApiWithSearchedText(textSeach, selectedPage) : await getPopularFilmsFromApi(page + 1);
+                const results = ressource === "search" ? await getFilmsFromApiWithSearchedText(textSeach, selectedPage) : await getPopularFilmsFromApi(selectedPage);
          
             
             setPage(results.page);
