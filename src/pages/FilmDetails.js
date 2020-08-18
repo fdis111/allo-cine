@@ -7,6 +7,8 @@ import numeral from "numeral";
 import Loader from "../components/Loader";
 import Card from "../components/Card"
 import { getFilmDetailsFromApi, getSimalarFilmsFromApi } from "../api/movies";
+import {Breadcrumb, BreadcrumbItem} from "reactstrap";
+import { Link } from "react-router-dom";
 import defaultImage from "../defaultImage.png";
 
 
@@ -119,6 +121,16 @@ export default function FilmDetails (props) {
            <Navbar /> 
            {renderLoader(loading)}
             <div className="container">
+            {/* <button type="button" class="btn btn-primary mt-3" data-toggle="button" aria-pressed="false">
+                Single toggle
+            </button> */}
+
+                   <div className="col-md-3 mt-3 pl-0">
+                    <Breadcrumb className="ml-0">
+                            <BreadcrumbItem><Link to="/">Films</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>Film details</BreadcrumbItem>
+                        </Breadcrumb>
+                   </div>
                 {renderFilm()}
                 <div className="row">
                     {renderPopularFims()}

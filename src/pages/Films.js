@@ -23,7 +23,7 @@ export default function Films () {
     const [ totalPage , setTotalPage ] = useState(0);
     const [title, setTitle] = useState("");
     const [ressource, setRessource] = useState("");
-    // const [ selectedPage, setSelectedPage] = useState(0)
+    const [ isTitle, setIsTitle ] = useState(true);
     // const [ error, setError ] = useState(false);
 
     const hadleTextSeach = (e) => {
@@ -60,13 +60,16 @@ export default function Films () {
 
     const fetchFilms = async () => {
         try {
+            setIsTitle(false);
             setLoading(true);
+            setFilms([]);
             const results = await getFilmsFromApiWithSearchedText(textSeach, page + 1);
             setPage(results.page);
             setTotalResults(results.total_results);
             setTotalPage(results.total_pages);
             setTitle(`Résultats pour "${textSeach}"`)
             setRessource("search");
+            setIsTitle(true);
             setFilms(results.results);
 
             setLoading(false);
@@ -126,7 +129,9 @@ export default function Films () {
 
     const fetcPopularFilms = async() => {
         try {
+            setIsTitle(false);
             setLoading(true);
+            setFilms([]);
             const results = await getPopularFilmsFromApi(page + 1);
             console.log(results);
             setTotalResults(results.total_results);
@@ -134,6 +139,7 @@ export default function Films () {
             setFilms(results.results);
             setTitle("Films Populaires");
             setRessource("popular");
+            setIsTitle(true);
             setLoading(false);
             
         } catch (error) {
@@ -142,12 +148,19 @@ export default function Films () {
         }
     }
         
-
-    // async function fetchData() {
-    //     // You can await here
-    //     const response = await fetch(url);
-    //     const results = await response.json();
-    //   }
+    const renderTitle = () => {
+        if (isTitle) {
+            return(
+                <div className="mb-3 mt-3">
+                    <h1>{title}</h1>
+                    <hr />
+                    <p>{ page > 0 ? `Page ${page} / ${totalPage}` : null}</p>
+                </div>
+            )
+        } else{
+            return;
+        }
+    }
 
     return(
         <div>
@@ -159,11 +172,7 @@ export default function Films () {
             />
             {renderLoader(loading)}
             <FilmContainer className="container">
-                <div className="mb-4">
-                    <h1>{title}</h1>
-                    <hr />
-                    <p>{ page > 0 ? `Page ${page} / ${totalPage}` : null}</p>
-                </div>
+            {renderTitle()}
                 
                 <div className="row">
                     {renderMovies()}

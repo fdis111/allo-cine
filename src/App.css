@@ -146,3 +146,14 @@ figure.figurefx {
   figure:hover {
     box-shadow: 0 0 20px rgba(0,0,0,.3)
   }
+
+  .breadcrumb{
+      /* background: rgb(107, 149, 204); */
+      background: none;
+      color: #F2F0FC !important;
+  }
+
+  .breadcrumb a{
+      color: #1181C8;
+  }
+  
