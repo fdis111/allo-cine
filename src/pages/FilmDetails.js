@@ -5,7 +5,8 @@ import styled from "styled-components";
 import moment from 'moment';
 import numeral from "numeral";
 import Loader from "../components/Loader";
-import { getFilmDetailsFromApi } from "../api/movies";
+import Card from "../components/Card"
+import { getFilmDetailsFromApi, getSimalarFilmsFromApi } from "../api/movies";
 import defaultImage from "../defaultImage.png";
 
 
@@ -30,6 +31,7 @@ const FilmDetailContainer =  styled.div`
 export default function FilmDetails (props) {
     const [ loading, setLoading ] = useState(true); 
     const [ film, setFilm ] = useState(undefined);
+    const [similarFilms, setSimilarFilms] = useState([]);
 
 
 
@@ -39,9 +41,32 @@ export default function FilmDetails (props) {
         getFilmDetailsFromApi(FilmId).then(data => {
             setFilm(data)
             setLoading(false)
+        });
+        getSimalarFilmsFromApi(FilmId).then(data => {
+            setSimilarFilms(data.results);
+            // console.log(data);
         })
     },[FilmId]);
 
+
+    // useEffect( () => {
+    //     getSimalarFilmsFromApi(FilmId).then(data => {
+    //         setSimilarFilms(data.results);
+    //         console.log(data);
+    //     })
+    // }, [FilmId])
+
+    console.log(similarFilms);
+
+    const renderPopularFims = () => {
+        if (similarFilms.length > 0) {
+            similarFilms.map(film => {
+                return <Card key={film.id} movie={film} />
+            })
+        } else{
+            return null
+        }
+    }
 
     const renderLoader = (loading) => {
         if(loading === true) {
@@ -51,38 +76,38 @@ export default function FilmDetails (props) {
         }
     } 
 
+    
     const renderFilm = () => {
         if (film) {
             return(
                 <FilmDetailContainer>
-                    <div className="row mt-3">
-                    <div className="col-md-6">
-                        <img src={ film.poster_path ? getImageFromApi(film.poster_path) : defaultImage } alt={film.title} />
+                    <div className="row mt-4">
+                        <div className="col-md-3">
+                            <img src={ film.poster_path ? getImageFromApi(film.poster_path, 300) : defaultImage } alt={film.title} />
+                        </div>
+                        <div className="col-md-9">
+                            <FilmTiTle>{film.title}</FilmTiTle>
+                            <div>
+                                <CustomLabel>Genres </CustomLabel>
+                                {film.genres.map(genre => genre.name).join(" / ")} 
+                            </div>
+                            <div>
+                                <CustomLabel>Sortie </CustomLabel>  
+                                {moment(film.release_date, "YYYYMMDD").format("DD/MM/YYYY")} 
+                            </div>
+                            <div>
+                                <CustomLabel>Titre original </CustomLabel> 
+                                {film.original_title}
+                            </div>
+                            <div>
+                                <CustomLabel>Budget </CustomLabel> 
+                                {numeral(film.budget).format('0,0')} $
+                            </div>
+                            <div>
+                                <SynopsisTitle>Synopsis</SynopsisTitle>
+                            <p>{film.overview}</p> 
+                        </div>
                     </div>
-                    <div className="col-md-6">
-                        <FilmTiTle>{film.title}</FilmTiTle>
-                        <div>
-                            <CustomLabel>Genres </CustomLabel>
-                            {film.genres.map(genre => genre.name).join(" / ")} 
-                        </div>
-                        <div>
-                            <CustomLabel>Sortie </CustomLabel>  
-                            {moment(film.release_date, "YYYYMMDD").format("DD/MM/YYYY")} 
-                        </div>
-                        <div>
-                            <CustomLabel>Titre original </CustomLabel> 
-                            {film.original_title}
-                        </div>
-                        <div>
-                            <CustomLabel>Budget </CustomLabel> 
-                            {numeral(film.budget).format('0,0')} $
-                        </div>
-                        <div>
-                            <SynopsisTitle>Synopsis</SynopsisTitle>
-                        <p>{film.overview}</p> 
-                    </div>
-                    </div>
-                    
                     </div>
                 </FilmDetailContainer>
             )
@@ -95,6 +120,9 @@ export default function FilmDetails (props) {
            {renderLoader(loading)}
             <div className="container">
                 {renderFilm()}
+                <div className="row">
+                    {renderPopularFims()}
+                </div>
             </div>
             
            

@@ -14,7 +14,7 @@ export const getFilmsFromApiWithSearchedText = async (text, page) => {
 }
 
 export const getImageFromApi = (name, size=500) => {
-    return `https://image.tmdb.org/t/p/w500${name}`;
+    return `https://image.tmdb.org/t/p/w${size}${name}`;
 }
 
 
@@ -28,6 +28,17 @@ export const getUpComingFilmsFromApi = async(page) => {
             
         }
 } 
+
+export const getSimalarFilmsFromApi = async (id) => {
+    const url = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_TOKEN}&language=fr&page=1`;
+    try {
+        const response = await fetch(url);
+        return  await response.json()
+    } catch (error) {
+        console.log(error) 
+        
+    }
+}
 
 export const getPopularFilmsFromApi = async(page) => {
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_TOKEN}&language=fr&page=${page}`;

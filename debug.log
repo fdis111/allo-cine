@@ -1,0 +1,15 @@
+[0817/160754.383:ERROR:process_reader_win.cc(123)] NtOpenThread: {Accès refusé} Un processus a demandé l’accès a un objet, mais il ne bénéficie pas des autorisations nécessaires. (0xc0000022)
+[0817/160754.399:ERROR:process_reader_win.cc(123)] NtOpenThread: {Accès refusé} Un processus a demandé l’accès a un objet, mais il ne bénéficie pas des autorisations nécessaires. (0xc0000022)
+[0817/160754.391:ERROR:process_reader_win.cc(123)] NtOpenThread: {Accès refusé} Un processus a demandé l’accès a un objet, mais il ne bénéficie pas des autorisations nécessaires. (0xc0000022)
+[0817/160754.199:ERROR:process_reader_win.cc(123)] NtOpenThread: {Accès refusé} Un processus a demandé l’accès a un objet, mais il ne bénéficie pas des autorisations nécessaires. (0xc0000022)
+[0817/160754.680:ERROR:exception_snapshot_win.cc(98)] thread ID 3176 not found in process
+[0817/160754.199:ERROR:process_reader_win.cc(123)] NtOpenThread: {Accès refusé} Un processus a demandé l’accès a un objet, mais il ne bénéficie pas des autorisations nécessaires. (0xc0000022)
+[0817/160754.680:ERROR:exception_snapshot_win.cc(98)] thread ID 10168 not found in process
+[0817/160754.680:ERROR:exception_snapshot_win.cc(98)] thread ID 13600 not found in process
+[0817/160754.648:ERROR:exception_snapshot_win.cc(98)] thread ID 13084 not found in process
+[0817/160754.239:ERROR:process_reader_win.cc(123)] NtOpenThread: {Accès refusé} Un processus a demandé l’accès a un objet, mais il ne bénéficie pas des autorisations nécessaires. (0xc0000022)
+[0817/160754.680:ERROR:exception_snapshot_win.cc(98)] thread ID 13608 not found in process
+[0817/160754.479:ERROR:process_reader_win.cc(123)] NtOpenThread: {Accès refusé} Un processus a demandé l’accès a un objet, mais il ne bénéficie pas des autorisations nécessaires. (0xc0000022)
+[0817/160754.680:ERROR:exception_snapshot_win.cc(98)] thread ID 492 not found in process
+[0817/160754.680:ERROR:exception_snapshot_win.cc(98)] thread ID 3776 not found in process
+[0817/160754.680:ERROR:exception_snapshot_win.cc(98)] thread ID 11160 not found in process

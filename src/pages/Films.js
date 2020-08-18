@@ -32,7 +32,10 @@ export default function Films () {
 
     const hadleSubmit = (e) => {
         e.preventDefault();
-        fetchFilms();
+        if (e.target.elements[0].value.length >= 2) {
+            fetchFilms();
+        }
+        
     }
 
     const renderLoader = (loading) => {
@@ -44,7 +47,7 @@ export default function Films () {
     } 
 
     const renderMovies = () => {
-        if (films.length > 1) {
+        if (films.length) {
             return (
                 films.map( film => {
                    return <Card key={film.id} movie={film} />
